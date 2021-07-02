@@ -13,6 +13,8 @@ Summer Boot
         :target: https://summer-boot.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
 
+.. image:: https://badges.gitter.im/summer-frameworks.svg
+        :target: https://gitter.im/summer-frameworks
 
 
 
