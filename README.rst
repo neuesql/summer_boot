@@ -21,6 +21,7 @@ Summer boot makes python simple, modern, productive and cloud-read to go.
 
 * Free software: Apache Software License 2.0
 * Documentation: https://summer-boot.readthedocs.io.
+* Inspried by https://spring.io/projects/spring-boot
 
 
 Features
