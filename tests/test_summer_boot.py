@@ -2,11 +2,9 @@
 
 """Tests for `summer_boot` package."""
 
-
 import unittest
 from click.testing import CliRunner
 
-from summer_boot import summer_boot
 from summer_boot import cli
 
 
