@@ -10,7 +10,7 @@ from summer_boot import summer_boot
 from summer_boot import cli
 
 
-class TestSummer_boot(unittest.TestCase):
+class TestSummerBoot(unittest.TestCase):
     """Tests for `summer_boot` package."""
 
     def setUp(self):
