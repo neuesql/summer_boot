@@ -32,7 +32,7 @@ Features
 * Summer is flexible, testabe and maintainable: Inversion of Control (IoC) and Dependency Injection (DI).
 * Summer is simple: Intensive decorators integrated third-party library's functions.
 * Summer is Microservice: WebService, SocketService, Data engineering Service and Data Scientist Notebook.
-* Summer is productive: combined application context and auto-configured template and yaml.
+* Summer is productive: combined application context and auto-configuration with PyCharm, Visual Studio IDE support.
 * Summer is stream system: even-driven and stream integration service.
 * Summer is cloud-ready: integrated AWS, GCP and Azure Platform.
 * Summer is production-ready fast and reactive design pattern.
