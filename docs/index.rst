@@ -8,6 +8,7 @@ Welcome to Summer Boot's documentation!
    readme
    installation
    usage
+   annotation
    modules
    contributing
    authors
