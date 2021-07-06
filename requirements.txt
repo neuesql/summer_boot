@@ -9,3 +9,6 @@ Sphinx==4.0.2
 twine==3.4.1
 Click==8.0.1
 dependency_injector==4.34.0
+
+setuptools~=52.0.0
+pyyaml=5.4.1

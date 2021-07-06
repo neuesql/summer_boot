@@ -1,5 +1,8 @@
 from argparse import ArgumentParser
 from typing import List, Optional, Dict
+import glob
+import os
+import yaml
 
 
 class Environment:
@@ -7,12 +10,43 @@ class Environment:
     def __init__(self, env_name: str = 'default') -> None:
         self.env_name = env_name
 
+        self.DEFAULT_APPLICATION_NAME = 'application'
+        self.DEFAULT_APPLICATION_PROFILE_TEST = 'test'
+        self.DEFAULT_APPLICATION_PROFILE_DEV = 'dev'
+        self.DEFAULT_APPLICATION_PROFILE_PROD = 'prod'
+        self.properties = {}
+
     def start(self):
         #     load yaml
         return self
 
     def stop(self):
         return self
+
+    # 1. yml
+    # 2. ini
+    # 3. env
+
+    def get_all_configurations(self):
+        current_working_dir = os.getcwd()
+        self.get_yml_configuration(current_working_dir)
+        self.get_ini_configuration(current_working_dir)
+        self.get_env_configuration()
+
+    def get_yml_configuration(self, file_path):
+        file_pattern = f'{file_path}/application-*.yml'
+        files = glob.glob(file_pattern)
+        for file in files:
+            self.properties['file'] = yaml.safe_load(file)
+
+    def get_ini_configuration(self, file_path):
+        pass
+
+    def get_env_configuration(self):
+        pass
+
+    def merge_properties(self, loaded_properties):
+        pass
 
 
 class ApplicationContext:
