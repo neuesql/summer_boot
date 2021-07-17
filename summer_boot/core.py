@@ -17,7 +17,7 @@ class Environment:
         self.properties = {}
 
     def start(self):
-        #     load yaml
+        self.get_all_configurations()
         return self
 
     def stop(self):
@@ -37,7 +37,8 @@ class Environment:
         file_pattern = f'{file_path}/application-*.yml'
         files = glob.glob(file_pattern)
         for file in files:
-            self.properties['file'] = yaml.safe_load(file)
+            with open(file) as file_handle:
+                self.properties[file] = yaml.safe_load(file_handle)
 
     def get_ini_configuration(self, file_path):
         pass
