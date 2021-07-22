@@ -7,9 +7,8 @@ import yaml
 
 class Environment:
 
-    def __init__(self, env_name: str = 'default') -> None:
-        self.env_name = env_name
-
+    def __init__(self, profile_name: str = 'default') -> None:
+        self.profile_name = profile_name
         self.DEFAULT_APPLICATION_NAME = 'application'
         self.DEFAULT_APPLICATION_PROFILE_TEST = 'test'
         self.DEFAULT_APPLICATION_PROFILE_DEV = 'dev'
@@ -24,13 +23,13 @@ class Environment:
         return self
 
     # 1. yml
-    # 2. ini
+    # 2. properties
     # 3. env
 
     def get_all_configurations(self):
         current_working_dir = os.getcwd()
         self.get_yml_configuration(current_working_dir)
-        self.get_ini_configuration(current_working_dir)
+        self.get_properties_configuration(current_working_dir)
         self.get_env_configuration()
 
     def get_yml_configuration(self, file_path):
@@ -40,7 +39,7 @@ class Environment:
             with open(file) as file_handle:
                 self.properties[file] = yaml.safe_load(file_handle)
 
-    def get_ini_configuration(self, file_path):
+    def get_properties_configuration(self, file_path):
         pass
 
     def get_env_configuration(self):
@@ -62,7 +61,6 @@ class ApplicationContext:
         self.terminating: bool = False
 
         self.singleton_objects: Dict[str, object] = {}
-        self.singleton_creating_objects: Dict[str, object] = {}
         self.providers: List[type] = []
 
     @staticmethod
@@ -94,7 +92,7 @@ class ApplicationContext:
     def initialize_environment(self):
         environment = Environment()
         environment.start()
-        self.register_singleton(Environment.__class__, environment)
+        self.register_singleton(Environment, environment)
         return environment
 
     def initialize_context(self, ps: List[type]):
@@ -104,13 +102,13 @@ class ApplicationContext:
         return self
 
     def get_bean(self, type, name):
-        return None
+        return self
 
     def find_providers(self):
         return []
 
-    def register_singleton(self, __class__, environment):
-        pass
+    def register_singleton(self, class_type, environment):
+        self.singleton_objects[class_type] = environment
 
 
 class SummerApplication:
