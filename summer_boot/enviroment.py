@@ -1,0 +1,2 @@
+class ApplicationEnvironment:
+    pass
