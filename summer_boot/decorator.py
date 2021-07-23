@@ -1,2 +1,6 @@
-def bean_decorator(cls):
+def controller(cls):
+    pass
+
+
+def service(cls):
     pass
