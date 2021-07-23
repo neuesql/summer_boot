@@ -5,7 +5,7 @@ from typing import List, Optional, Dict, Type
 from summer_boot.enviroment import ApplicationEnvironment
 
 
-class LifeCycle(ABC):
+class ApplicationLifeCycle(ABC):
 
     @abstractmethod
     def start(self):
@@ -39,7 +39,7 @@ class ApplicationEventPublisher(ABC):
         ...
 
 
-class AbstractBeanContext(LifeCycle, ApplicationEventPublisher):
+class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher):
 
     def __init__(self):
         self.__initializing: bool = False
@@ -77,20 +77,21 @@ class AbstractBeanContext(LifeCycle, ApplicationEventPublisher):
 class ApplicationContext(AbstractBeanContext):
 
     def __init__(self):
+        super().__init__()
         self.__packages: List = []
         self.__args: ArgumentParser = Optional[ArgumentParser, None]
         self.environment: ApplicationEnvironment = Optional[ApplicationEnvironment, None]
 
     @staticmethod
     def build(classes, args):
-        application_context = ApplicationContext().__set_classes(classes).__set_args(args)
+        application_context = ApplicationContext().set_classes(classes).set_args(args)
         return application_context
 
-    def __set_classes(self, classes: List):
+    def set_classes(self, classes: List):
         self.__packages = classes
         return self
 
-    def __set_args(self, args: ArgumentParser):
+    def set_args(self, args: ArgumentParser):
         self.__args = args
         return self
 
