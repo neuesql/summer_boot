@@ -30,6 +30,9 @@ class ApplicationLifeCycle(ABC):
 
 class ApplicationBeanProvider(ABC):
 
+    def __init__(self):
+        self.providers: List = []
+
     @abstractmethod
     def get_bean_provider(self, class_type: Type):
         ...
@@ -150,11 +153,11 @@ class ApplicationContext(AbstractBeanContext):
     def find_all_bean_providers(self):
         module = sys.modules[__name__]
         for name, instance in inspect.getmembers(module, predicate=inspect.isclass):
-            logger.info(name)
-            if hasattr(instance, '__bean_type'):
+            if hasattr(instance, 'bean_type'):
                 self.logger.info(name)
-            if hasattr(instance, '__factory_name'):
-                self.logger.info(name)
+                self.logger.info(instance.bean_name)
+                self.logger.info(instance.bean_type)
+                self.logger.info(instance.bean_module)
 
     def create_bean(self, class_type: Type):
         pass
