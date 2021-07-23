@@ -1,8 +1,11 @@
 from abc import ABC, abstractmethod
 from argparse import ArgumentParser
 from typing import List, Optional, Dict, Type
-from importlib import import_module
+from loguru import logger
+import inspect
+import sys
 
+from summer_boot.decorator import controller, bean
 from summer_boot.enviroment import ApplicationEnvironment
 
 
@@ -64,6 +67,7 @@ class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher, Appli
 
         self.__singleton_objects: Dict[Type, object] = {}
         self.__providers: List[Type] = []
+        self.logger = logger
 
     @abstractmethod
     def create_bean(self, class_type: Type):
@@ -98,6 +102,11 @@ class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher, Appli
         ...
 
 
+@bean(name='user')
+class UserController:
+    pass
+
+
 class ApplicationContext(AbstractBeanContext):
 
     def __init__(self):
@@ -125,8 +134,10 @@ class ApplicationContext(AbstractBeanContext):
         self.find_all_bean_providers()
 
     def find_all_bean_providers(self):
-        services = import_module(name="services")
-        print(services)
+        module = sys.modules[__name__]
+        for name, instance in inspect.getmembers(module, predicate=inspect.isclass):
+            if hasattr(instance, '__bean_type'):
+                self.logger.info(name)
 
     def create_bean(self, class_type: Type):
         pass
