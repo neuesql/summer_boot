@@ -1,11 +1,7 @@
-import os
-
 from summer_boot.application import SummerApplication
-from summer_boot.decorator import SummerBootApplication
 from argparse import ArgumentParser
 
 
-@SummerBootApplication
 class MyApplication:
     pass
 

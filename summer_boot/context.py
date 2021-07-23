@@ -24,6 +24,21 @@ class ApplicationLifeCycle(ABC):
         ...
 
 
+class ApplicationBeanProvider(ABC):
+
+    @abstractmethod
+    def get_bean_provider(self, class_type: Type):
+        ...
+
+    @abstractmethod
+    def get_bean_providers(self):
+        ...
+
+    @abstractmethod
+    def find_all_bean_providers(self):
+        ...
+
+
 class ApplicationEventPublisher(ABC):
 
     @abstractmethod
@@ -39,7 +54,7 @@ class ApplicationEventPublisher(ABC):
         ...
 
 
-class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher):
+class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher, ApplicationBeanProvider):
 
     def __init__(self):
         self.__initializing: bool = False
@@ -73,6 +88,14 @@ class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher):
     def get_beans(self, class_type: Type) -> List[object]:
         ...
 
+    @abstractmethod
+    def initialize_event_listeners(self):
+        ...
+
+    @abstractmethod
+    def initialize_context(self, beans: List):
+        ...
+
 
 class ApplicationContext(AbstractBeanContext):
 
@@ -99,35 +122,5 @@ class ApplicationContext(AbstractBeanContext):
         self.environment = ApplicationEnvironment()
         self.environment.start()
 
-    def create_bean(self, class_type: Type):
-        pass
-
-    def destroy_bean(self, class_type: Type):
-        pass
-
-    def refresh_bean(self, class_type: Type):
-        pass
-
-    def get_bean(self, class_type: Type) -> Optional[object]:
-        pass
-
-    def get_beans(self, class_type: Type) -> List[object]:
-        pass
-
-    def stop(self):
-        pass
-
-    def refresh(self):
-        pass
-
-    def is_running(self) -> bool:
-        pass
-
-    def publish_event(self, event: object) -> None:
-        pass
-
-    def publish_event_sync(self, event: object) -> None:
-        pass
-
-    def publish_event_async(self, event: object) -> None:
+    def find_all_bean_providers(self):
         pass

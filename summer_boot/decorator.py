@@ -1,5 +1,2 @@
-from argparse import ArgumentParser
-
-
-def SummerBootApplication(cls):
-    return cls
+def bean_decorator(cls):
+    pass

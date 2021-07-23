@@ -13,3 +13,5 @@ dependency_injector==4.34.0
 setuptools~=52.0.0
 pyyaml
 python-dotenv
+bentoml
+pandas
