@@ -1,3 +1,5 @@
+import os
+
 from summer_boot.application import SummerApplication
 from summer_boot.context import ApplicationContext
 from summer_boot.decorator import SummerBootApplication

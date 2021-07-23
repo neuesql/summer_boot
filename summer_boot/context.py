@@ -79,8 +79,8 @@ class ApplicationContext(AbstractBeanContext):
     def __init__(self):
         super().__init__()
         self.__packages: List = []
-        self.__args: ArgumentParser = Optional[ArgumentParser, None]
-        self.environment: ApplicationEnvironment = Optional[ApplicationEnvironment, None]
+        self.__args: ArgumentParser = Optional[ArgumentParser]
+        self.environment: ApplicationEnvironment = Optional[ApplicationEnvironment]
 
     @staticmethod
     def build(classes, args):
@@ -98,3 +98,36 @@ class ApplicationContext(AbstractBeanContext):
     def start(self):
         self.environment = ApplicationEnvironment()
         self.environment.start()
+
+    def create_bean(self, class_type: Type):
+        pass
+
+    def destroy_bean(self, class_type: Type):
+        pass
+
+    def refresh_bean(self, class_type: Type):
+        pass
+
+    def get_bean(self, class_type: Type) -> Optional[object]:
+        pass
+
+    def get_beans(self, class_type: Type) -> List[object]:
+        pass
+
+    def stop(self):
+        pass
+
+    def refresh(self):
+        pass
+
+    def is_running(self) -> bool:
+        pass
+
+    def publish_event(self, event: object) -> None:
+        pass
+
+    def publish_event_sync(self, event: object) -> None:
+        pass
+
+    def publish_event_async(self, event: object) -> None:
+        pass

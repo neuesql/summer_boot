@@ -1,8 +1,0 @@
-spring:
-    application:
-        name: cruncher
-    datasource:
-        driverClassName: com.mysql.jdbc.Driver
-        url: jdbc:mysql://localhost/test
-server:
-    port: 9000

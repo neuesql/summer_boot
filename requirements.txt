@@ -11,4 +11,5 @@ Click==8.0.1
 dependency_injector==4.34.0
 
 setuptools~=52.0.0
-pyyaml=5.4.1
+pyyaml
+python-dotenv
