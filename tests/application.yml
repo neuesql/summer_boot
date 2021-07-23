@@ -1,4 +1,4 @@
-spring:
+summer:
     application:
         name: cruncher
     datasource:
