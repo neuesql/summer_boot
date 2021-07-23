@@ -5,7 +5,7 @@ from loguru import logger
 import inspect
 import sys
 
-from summer_boot.decorator import controller, bean
+from summer_boot.decorator import bean, factory
 from summer_boot.enviroment import ApplicationEnvironment
 
 
@@ -102,9 +102,23 @@ class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher, Appli
         ...
 
 
+class User:
+    def __init__(self):
+        self.user_name: str = "wuqunfei"
+        self.password: str = "1213"
+
+
 @bean(name='user')
 class UserController:
     pass
+
+
+@factory(name="fac")
+class UserConfig:
+
+    @bean(name="my_config", type=User)
+    def get_config(self) -> User:
+        return User()
 
 
 class ApplicationContext(AbstractBeanContext):
@@ -136,7 +150,10 @@ class ApplicationContext(AbstractBeanContext):
     def find_all_bean_providers(self):
         module = sys.modules[__name__]
         for name, instance in inspect.getmembers(module, predicate=inspect.isclass):
+            logger.info(name)
             if hasattr(instance, '__bean_type'):
+                self.logger.info(name)
+            if hasattr(instance, '__factory_name'):
                 self.logger.info(name)
 
     def create_bean(self, class_type: Type):
