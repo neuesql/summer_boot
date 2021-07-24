@@ -178,6 +178,11 @@ class ApplicationContext(AbstractBeanContext):
         pass
 
     def initialize_context(self, beans: List):
+        """
+        https://docs.python.org/zh-cn/3/library/importlib.html
+        @param beans:
+        @return:
+        """
         pass
 
     def stop(self):
