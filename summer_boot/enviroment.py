@@ -16,11 +16,11 @@ class BaseEnvironment(ABC):
         self.running: bool = False
         self.properties: Dict[str, object] = {}
 
-    @abstractmethod
+    # @abstractmethod
     def start(self):
         ...
 
-    @abstractmethod
+    # @abstractmethod
     def stop(self):
         ...
 

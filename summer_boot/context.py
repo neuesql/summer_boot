@@ -105,25 +105,6 @@ class AbstractBeanContext(ApplicationLifeCycle, ApplicationEventPublisher, Appli
         ...
 
 
-class User:
-    def __init__(self):
-        self.user_name: str = "wuqunfei"
-        self.password: str = "1213"
-
-
-@bean(name='user')
-class UserController:
-    pass
-
-
-@factory(name="fac")
-class UserConfig:
-
-    @bean(name="my_config", type=User)
-    def get_config(self) -> User:
-        return User()
-
-
 class ApplicationContext(AbstractBeanContext):
 
     def __init__(self):
